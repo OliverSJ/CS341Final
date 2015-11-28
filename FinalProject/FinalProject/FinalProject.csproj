@@ -46,6 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessTierLogic.cs" />
+    <Compile Include="BusinessTierObjects.cs" />
     <Compile Include="DataAccessTier.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

@@ -101,18 +101,5 @@ namespace DataAccessTier
             return ds;
     }
 
-    //
-    // ExecutionActionQuery:  executes an Insert, Update or Delete query, and returns
-    // the number of records modified.
-    //
-    public int ExecuteActionQuery(string sql)
-    {
-      //
-      // TODO!
-      //
-      
-      return -1;
-    }
-
   }//class
 }//namespace
