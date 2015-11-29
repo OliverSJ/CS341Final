@@ -23,6 +23,9 @@ namespace FinalProject
             IReadOnlyList<BusinessTier.Stations> lines = bt.getStations();
             IEnumerator<BusinessTier.Stations> lineEn = lines.GetEnumerator();
 
+            // number of stations
+            this.textBox6.Text = bt.num_Stat();
+
             BusinessTier.Stations curLine;
 
             // format the content
@@ -78,6 +81,7 @@ namespace FinalProject
             // total riderships and average per day
             BusinessTier.Sum_Avg myResult = bt.totalRiders(Convert.ToInt32(words[0]));
             this.textBox4.Text = Convert.ToString(myResult.Sum);
+            this.textBox5.Text = Convert.ToString(myResult.Average);
 
         }
 
@@ -107,6 +111,9 @@ namespace FinalProject
             this.textBox2.Text = newMsg;
             //direction
             this.textBox3.Text = stopInfo.Direction;
+
+            //detail
+            this.textBox7.Text = bt.getDetail(stopInfo.StopID);
 
         }
     }

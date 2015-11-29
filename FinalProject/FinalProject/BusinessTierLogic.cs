@@ -57,6 +57,15 @@ namespace BusinessTier
             return null;
     }
    
+    public string num_Stat()
+    {
+            int total = (from stations in m_CTA.Stations
+                         select stations).Count();
+            return Convert.ToString(total);
+    }
+    
+
+
     // get a particular stop's info by its stop id
     public Stops getStopInfo(int stopID)
     {
@@ -128,6 +137,7 @@ namespace BusinessTier
     public Stations findStation(int stationID)
     {
             var query = from station in m_CTA.Stations
+                        
                         where station.StationID == stationID
                         select station;
 
@@ -137,7 +147,6 @@ namespace BusinessTier
                 //format the data that was retrieved and add it to the list lines
                 foreach (var row in query)
                 {
-
                     Stations myStation = new Stations(Convert.ToInt32(row.StationID), Convert.ToString(row.Name));
                     return myStation;
                 }
@@ -150,27 +159,53 @@ namespace BusinessTier
         // get total riders
         public Sum_Avg totalRiders(int stationID)
         {
+            int pas = 0;
+            int days = 0;
+
             var query = from riders in m_CTA.Riderships
                         where riders.StationID == stationID
                         select riders;
+                        
 
-            int pas = 0;
-            
             // got total riders
             foreach (var row in query)
             {
                 pas = pas + row.DailyTotal;
             }
 
-            /*
-            int days = (from rd in m_CTA.Riderships
-                        where rd.StationID == stationID
-                        group by rd.TheDate
-                        select rd).Count();
-             */
+            // query for total days
+            var query2 = from riders in m_CTA.Riderships
+                         where riders.StationID == stationID
+                         group riders by riders.TheDate into grp
+                         select new { key = grp.Key, count = grp.Count() };
 
-            Sum_Avg myResult = new Sum_Avg(pas,0.0);
+            // got total days
+            foreach (var row in query2)
+            {
+                days = days + row.count;
+            }
+
+            double average = pas / days;
+
+            Sum_Avg myResult = new Sum_Avg(pas,average);
             return myResult;
+        }
+
+
+
+        public string getDetail(int stopID )
+        {
+            var query = from color in m_CTA.Lines
+                        join detail in m_CTA.StopDetails on color.LineID equals detail.LineID
+                        where detail.StopID == stopID
+                        select color;
+            
+            foreach (var row in query)
+            {
+                return Convert.ToString(row.Color);
+            }
+
+            return null;
         }
         
  }//class
