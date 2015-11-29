@@ -7,3 +7,6 @@ C:\Users\Elisabet\Documents\GitHub\CS341Final\FinalProject\FinalProject\obj\Debu
 C:\Users\Elisabet\Documents\GitHub\CS341Final\FinalProject\FinalProject\obj\Debug\FinalProject.csproj.GenerateResource.Cache
 C:\Users\Elisabet\Documents\GitHub\CS341Final\FinalProject\FinalProject\obj\Debug\FinalProject.exe
 C:\Users\Elisabet\Documents\GitHub\CS341Final\FinalProject\FinalProject\obj\Debug\FinalProject.pdb
+C:\Users\oliversanjuan\Documents\GitHubVisualStudio\CS341Final\FinalProject\FinalProject\bin\Debug\FinalProject.exe.config
+C:\Users\oliversanjuan\Documents\GitHubVisualStudio\CS341Final\FinalProject\FinalProject\obj\Debug\FinalProject.exe
+C:\Users\oliversanjuan\Documents\GitHubVisualStudio\CS341Final\FinalProject\FinalProject\obj\Debug\FinalProject.pdb
