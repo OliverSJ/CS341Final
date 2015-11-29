@@ -13,33 +13,34 @@ namespace FinalProject
 {
   public partial class Form1 : Form
   {
-       
+        BusinessTier.Business bt;
     public Form1()
     {
       InitializeComponent();
-      
-    }
-        BusinessTier.Business bt = new BusinessTier.Business();
 
+            bt = new BusinessTier.Business();
 
+            IReadOnlyList<BusinessTier.Stations> lines = bt.getStations();
+            IEnumerator<BusinessTier.Stations> lineEn = lines.GetEnumerator();
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            IReadOnlyList<BusinessTier.Stops> lines = bt.getStops();
-            IEnumerator<BusinessTier.Stops> lineEn = lines.GetEnumerator();
-
-            BusinessTier.Stops curLine;
+            BusinessTier.Stations curLine;
 
             // format the content
             while (lineEn.MoveNext())
             {
                 curLine = lineEn.Current;
-                string msg = string.Format(" {0}: {1}", curLine.StopID, curLine.Name);
+                string msg = string.Format(" {0}: {1}", curLine.StationID, curLine.Name);
                 this.listBox1.Items.Add(msg); // once formatted , add it to listbox1
             }
 
-           
+        }
+         
 
+
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+           
         }
 
 

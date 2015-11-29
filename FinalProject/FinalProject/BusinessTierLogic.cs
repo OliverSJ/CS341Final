@@ -70,10 +70,34 @@ namespace BusinessTier
             return null;
     }
 
-    public Coordinates getCoordinates(int stopID)
+    public IReadOnlyList<Stations> getStations()
+    {
+        List<Stations> lines = new List<Stations>();
+
+        var query = from stop in m_CTA.Stations
+                    select stop;
+
+        // if we did retrieve data
+        if (query != null)
+        {
+            //format the data that was retrieved and add it to the list lines
+            foreach (var row in query)
+            {
+                
+                Stations newAdd = new Stations(Convert.ToInt32(row.StationID), Convert.ToString(row.Name));
+                lines.Add(newAdd);
+            }
+
+            return lines;
+        }
+
+        return null;
+    }
+
+    public Coordinates getCoordinates(int stationID)
     {
             var query = from stop in m_CTA.Stops
-                        where stop.StopID == stopID
+                        where stop.StationID == stationID
                         select stop;
 
             Coordinates coord;
