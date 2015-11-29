@@ -124,7 +124,54 @@ namespace BusinessTier
 
         return null;
     }
+    
+    public Stations findStation(int stationID)
+    {
+            var query = from station in m_CTA.Stations
+                        where station.StationID == stationID
+                        select station;
 
+            // if we did retrieve data
+            if (query != null)
+            {
+                //format the data that was retrieved and add it to the list lines
+                foreach (var row in query)
+                {
+
+                    Stations myStation = new Stations(Convert.ToInt32(row.StationID), Convert.ToString(row.Name));
+                    return myStation;
+                }
+            }
+
+            return null;
+        }
+
+
+        // get total riders
+        public Sum_Avg totalRiders(int stationID)
+        {
+            var query = from riders in m_CTA.Riderships
+                        where riders.StationID == stationID
+                        select riders;
+
+            int pas = 0;
+            
+            // got total riders
+            foreach (var row in query)
+            {
+                pas = pas + row.DailyTotal;
+            }
+
+            /*
+            int days = (from rd in m_CTA.Riderships
+                        where rd.StationID == stationID
+                        group by rd.TheDate
+                        select rd).Count();
+             */
+
+            Sum_Avg myResult = new Sum_Avg(pas,0.0);
+            return myResult;
+        }
         
  }//class
 

@@ -79,6 +79,18 @@ namespace BusinessTier
 
     }//class
 
+    public class Sum_Avg
+    {
+        public readonly long Sum;
+        public readonly double Average;
+
+        public Sum_Avg(long sum, double average)
+        {
+            Sum = sum;
+            Average = average;
+        }
+    }
+
     //
     // StopDetails:
     //

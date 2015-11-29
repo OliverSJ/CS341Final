@@ -74,6 +74,11 @@ namespace FinalProject
                 string msg = string.Format(" {0}: {1}", curLine.StopID, curLine.Name);
                 this.listBox2.Items.Add(msg); // once formatted , add it to listbox2
             }
+
+            // total riderships and average per day
+            BusinessTier.Sum_Avg myResult = bt.totalRiders(Convert.ToInt32(words[0]));
+            this.textBox4.Text = Convert.ToString(myResult.Sum);
+
         }
 
         private void listBox2_DoubleClick(object sender, EventArgs e)
