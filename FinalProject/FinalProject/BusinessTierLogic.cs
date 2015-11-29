@@ -45,12 +45,13 @@ namespace BusinessTier
     }
 
 
-   // get all the info for each line
-    public IReadOnlyList<Stops> getStops()
+    // get all the info for each line
+    public IReadOnlyList<Stops> getStops(int stationID)
     {
             List<Stops> lines = new List<Stops>();
 
             var query = from stop in m_CTA.Stops
+                        where stop.StationID == stationID
                         select stop;
 
             // if we did retrieve data
