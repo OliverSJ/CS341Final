@@ -13,32 +13,44 @@ namespace FinalProject
 {
   public partial class Form1 : Form
   {
+       
     public Form1()
     {
       InitializeComponent();
       
     }
-        BusinessTier.Business bt = new BusinessTier.Business("CTA.mdf");
+        BusinessTier.Business bt = new BusinessTier.Business();
+
+
 
         private void button1_Click(object sender, EventArgs e)
         {
-            IReadOnlyList<BusinessTier.Lines> lines = bt.getLines();
-            IEnumerator<BusinessTier.Lines> lineEn = lines.GetEnumerator();
+            IReadOnlyList<BusinessTier.Stops> lines = bt.getStops();
+            IEnumerator<BusinessTier.Stops> lineEn = lines.GetEnumerator();
 
-            BusinessTier.Lines curLine;
+            BusinessTier.Stops curLine;
 
             // format the content
             while (lineEn.MoveNext())
             {
                 curLine = lineEn.Current;
-                string msg = string.Format(" {0}: {1}", curLine.LineID, curLine.Color);
+                string msg = string.Format(" {0}: {1}", curLine.StopID, curLine.Name);
                 this.listBox1.Items.Add(msg); // once formatted , add it to listbox1
             }
 
-            BusinessTier.Coordinates coord = bt.getCoordinates(30001);
-            string newMsg = string.Format("Latitude: {1}  Longitude: {0}", coord.Longitude,coord.Latitude);
-            MessageBox.Show(newMsg);
+           
 
+        }
+
+
+        // get the coordinates
+        private void listBox1_DoubleClick(object sender, EventArgs e)
+        {
+            //parse the item the user selected
+            string[] words = listBox1.SelectedItem.ToString().Split(':');
+            BusinessTier.Coordinates coord = bt.getCoordinates(Convert.ToInt32(words[0]));
+            string newMsg = string.Format("Latitude: {1}  Longitude: {0}", coord.Longitude, coord.Latitude);
+            MessageBox.Show(newMsg);
         }
     }
 }

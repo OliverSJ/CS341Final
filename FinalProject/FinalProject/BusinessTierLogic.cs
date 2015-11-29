@@ -5,7 +5,9 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-
+using System.Linq;
+using System.Data.SqlClient;
+using FinalProject;
 
 namespace BusinessTier
 {
@@ -20,16 +22,15 @@ namespace BusinessTier
     //
     private string _DBFile;
     private DataAccessTier.Data dataTier;
+    private CTADataContext m_CTA;
 
 
-    //
-    // Constructor:
-    //
-    public Business(string DatabaseFilename)
+        //
+        // Constructor:
+        //
+    public Business()
     {
-      _DBFile = DatabaseFilename;
-
-      dataTier = new DataAccessTier.Data(DatabaseFilename);
+            m_CTA = new CTADataContext();
     }
 
 
@@ -45,21 +46,21 @@ namespace BusinessTier
 
 
    // get all the info for each line
-    public IReadOnlyList< Lines> getLines()
+    public IReadOnlyList<Stops> getStops()
     {
-            List<Lines> lines = new List<Lines>();
-            
+            List<Stops> lines = new List<Stops>();
 
-            string sqlMsg = "Select * From Lines"; 
-            DataSet ds = dataTier.ExecuteNonScalarQuery(sqlMsg); // get all the info for the Lines
+            var query = from stop in m_CTA.Stops
+                        select stop;
 
             // if we did retrieve data
-            if(ds != null)
+            if(query != null)
             {
                 //format the data that was retrieved and add it to the list lines
-                foreach (DataRow row in ds.Tables["TABLE"].Rows)
+                foreach (var row in query)
                 {
-                    Lines newAdd = new Lines(Convert.ToInt32(row["LineID"]), Convert.ToString( row["Color"]));
+                    //int stopId, int sID, string name, string dir, int ada, int lat, int longitude
+                    Stops newAdd = new Stops(Convert.ToInt32(row.StopID), Convert.ToInt32(row.StationID), Convert.ToString(row.Name), Convert.ToString(row.Direction), Convert.ToInt32(row.ADA), Convert.ToInt32(row.Latitude), Convert.ToInt32(row.Longitude));
                     lines.Add(newAdd);
                 }
 
@@ -71,16 +72,18 @@ namespace BusinessTier
 
     public Coordinates getCoordinates(int stopID)
     {
-            string sqlMsg = string.Format("Select Latitude,Longitude From Stops Where StopID = {0}",stopID);
-            DataSet ds = dataTier.ExecuteNonScalarQuery(sqlMsg); // get coordinats for a specifc bus stop
-            Coordinates coord;
+            var query = from stop in m_CTA.Stops
+                        where stop.StopID == stopID
+                        select stop;
 
-            if (ds != null)
+            Coordinates coord;
+            if (query != null)
             {
+                
                 //format the data that was retrieved and add it to the list lines
-                foreach (DataRow row in ds.Tables["TABLE"].Rows)
+                foreach (FinalProject.Stop row in query) //ds.Tables["TABLE"].Rows)
                 {
-                    coord = new Coordinates(Convert.ToDouble(row["Latitude"]), Convert.ToDouble(row["Longitude"]));
+                    coord = new Coordinates(Convert.ToDouble(row.Latitude), Convert.ToDouble(row.Longitude));
                     return coord;
                 }
 
