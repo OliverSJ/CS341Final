@@ -106,10 +106,10 @@ namespace BusinessTier
         public readonly string Name;
         public readonly string Direction;
         public readonly int ADA;
-        public readonly int Latitude;
-        public readonly int Longitude;
+        public readonly double Latitude;
+        public readonly double Longitude;
 
-        public Stops(int stopId, int sID, string name, string dir, int ada, int lat, int longitude)
+        public Stops(int stopId, int sID, string name, string dir, int ada, double lat, double longitude)
         {
             StopID = stopId;
             StationID = sID;

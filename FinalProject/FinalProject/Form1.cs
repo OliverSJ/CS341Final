@@ -49,14 +49,16 @@ namespace FinalProject
         {
             //parse the item the user selected
             string[] words = listBox1.SelectedItem.ToString().Split(':');
+            // get coordinates
             BusinessTier.Coordinates coord = bt.getCoordinates(Convert.ToInt32(words[0]));
-            string newMsg = string.Format("Latitude: {1}  Longitude: {0}", coord.Longitude, coord.Latitude);
-            MessageBox.Show(newMsg);
 
+            // display coordinates
+            string newMsg = string.Format("({1},{0})", coord.Longitude, coord.Latitude);
+            this.textBox1.Text = newMsg;
 
 
             // now get the stops at this station
-            IReadOnlyList<BusinessTier.Stops> lines = bt.getStops(Convert.ToInt32(words[0]));
+            IReadOnlyList<BusinessTier.Stops> lines = bt.getAllStopsbyStationID(Convert.ToInt32(words[0]));
             IEnumerator<BusinessTier.Stops> lineEn = lines.GetEnumerator();
 
             BusinessTier.Stops curLine;
@@ -69,9 +71,38 @@ namespace FinalProject
             while (lineEn.MoveNext())
             {
                 curLine = lineEn.Current;
-                string msg = string.Format(" {0}: {1}", curLine.StationID, curLine.Name);
+                string msg = string.Format(" {0}: {1}", curLine.StopID, curLine.Name);
                 this.listBox2.Items.Add(msg); // once formatted , add it to listbox2
             }
+        }
+
+        private void listBox2_DoubleClick(object sender, EventArgs e)
+        {
+            //parse the item the user selected
+            string[] words = listBox2.SelectedItem.ToString().Split(':');
+            
+            // get stop info
+            BusinessTier.Stops stopInfo = bt.getStopInfo(Convert.ToInt32(words[0]));
+
+            // display coordinates of stop
+            string newMsg = string.Format("({1},{0})", stopInfo.Longitude, stopInfo.Latitude);
+            this.textBox1.Text = newMsg;
+            
+            // handicap accessible ?
+            if(stopInfo.ADA == 0)
+            {
+                newMsg = "No";
+            }
+            else
+            {
+                newMsg = "Yes";
+                
+            }
+            
+            this.textBox2.Text = newMsg;
+            //direction
+            this.textBox3.Text = stopInfo.Direction;
+
         }
     }
 }
