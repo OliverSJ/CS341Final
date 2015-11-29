@@ -8,12 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using Microsoft.Maps.MapControl.WPF;
 
 namespace FinalProject
 {
   public partial class Form1 : Form
   {
         BusinessTier.Business bt;
+    Themap theMap;
     public Form1()
     {
       InitializeComponent();
@@ -33,6 +35,8 @@ namespace FinalProject
                 this.listBox1.Items.Add(msg); // once formatted , add it to listbox1
             }
 
+           theMap = new Themap();
+
         }
          
 
@@ -40,12 +44,14 @@ namespace FinalProject
 
         private void button1_Click(object sender, EventArgs e)
         {
-           
-        }
+            
+             theMap.map.Center = new Location(41.966286, -87.678639);       //The default is to center on the UIC campus
+             elementHost1.Child = theMap;
+    }
 
 
-        // get the coordinates
-        private void listBox1_DoubleClick(object sender, EventArgs e)
+    // get the coordinates
+    private void listBox1_DoubleClick(object sender, EventArgs e)
         {
             //parse the item the user selected
             string[] words = listBox1.SelectedItem.ToString().Split(':');
