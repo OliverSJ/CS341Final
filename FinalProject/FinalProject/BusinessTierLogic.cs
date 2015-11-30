@@ -207,6 +207,33 @@ namespace BusinessTier
 
             return null;
         }
+
+        // get all the info for stops at a particular stations
+        public IReadOnlyList<Stops> getAllStopsbyLocation(double latitude, double longitude)
+        {
+          List<Stops> lines = new List<Stops>();
+
+          var query = from stop in m_CTA.Stops
+                      where stop.Latitude == latitude && stop.Longitude == longitude
+                      select stop;
+
+          // if we did retrieve data
+          if (query != null)
+          {
+            //format the data that was retrieved and add it to the list lines
+            foreach (var row in query)
+            {
+              Stops newAdd = new Stops(Convert.ToInt32(row.StopID), Convert.ToInt32(row.StationID), Convert.ToString(row.Name), Convert.ToString(row.Direction), Convert.ToInt32(row.ADA), Convert.ToInt32(row.Latitude), Convert.ToInt32(row.Longitude));
+              lines.Add(newAdd);
+            }
+
+            return lines;
+          }
+
+          return null;
+        }
+   
+
         
  }//class
 

@@ -14,7 +14,7 @@ namespace FinalProject
 {
   public partial class Form1 : Form
   {
-        BusinessTier.Business bt;
+    BusinessTier.Business bt;
     Themap theMap;
     public Form1()
     {
@@ -74,6 +74,8 @@ namespace FinalProject
             theMap.map.Focus(); 
             elementHost1.Child = theMap;
 
+            // Add event handler to push pin
+            pin.MouseRightButtonDown += new System.Windows.Input.MouseButtonEventHandler(pin_MouseRightButtonDown);
 
       // now get the stops at this station
       IReadOnlyList<BusinessTier.Stops> lines = bt.getAllStopsbyStationID(Convert.ToInt32(words[0]));
@@ -142,5 +144,17 @@ namespace FinalProject
             this.textBox7.Text = bt.getDetail(stopInfo.StopID);
 
         }
+
+        private void pin_MouseRightButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+
+          // display popup listbox of all selected movie reviews
+          Form2 form = new Form2((Pushpin)sender, bt);
+          DialogResult dialogresult = form.ShowDialog();
+
+          form.Dispose();
+
+        }
+
     }
 }
