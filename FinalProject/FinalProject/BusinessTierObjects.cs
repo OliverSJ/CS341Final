@@ -1,22 +1,4 @@
-﻿//
-// BusinessTier objects:  these classes define the objects serving as data 
-// transfer between UI and business tier.  These objects carry the data that
-// is normally displayed in the presentation tier.  The classes defined here:
-//
-//    Lines
-//    RiderShips
-//    Stations
-//    StopDetails
-//    Stops
-//    MovieDetail
-//
-// NOTE: the presentation tier should not be creating instances of these objects,
-// but instead calling the BusinessTier logic to obtain these objects.  You can 
-// create instances of these objects if you want, but doing so has no impact on
-// the underlying data store --- to change the data store, you have to call the
-// BusinessTier logic.
-//
-
+﻿
 using System;
 using System.Collections.Generic;
 
