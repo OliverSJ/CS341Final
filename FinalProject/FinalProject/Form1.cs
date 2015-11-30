@@ -93,10 +93,12 @@ namespace FinalProject
                 this.listBox2.Items.Add(msg); // once formatted , add it to listbox2
             }
 
+            
             // total riderships and average per day
             BusinessTier.Sum_Avg myResult = bt.totalRiders(Convert.ToInt32(words[0]));
             this.textBox4.Text = Convert.ToString(myResult.Sum);
             this.textBox5.Text = Convert.ToString(myResult.Average);
+            
 
         }
 

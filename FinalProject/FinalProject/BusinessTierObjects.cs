@@ -150,31 +150,4 @@ namespace BusinessTier
     }
 
 
-
-    //
-    // MovieDetail:
-    //
-    // Given a movie object, returns details about this movie --- reviews, average 
-    // rating given, etc.  
-    //
-    // NOTE: the reviews are returned in order by rating (descending 5, 4, 3, ...),
-    // with secondary sort based on user id (ascending).
-    //
-    /*
-    public class MovieDetail
-    {
-      public readonly Movie movie;
-      public readonly double AvgRating;
-      public readonly int NumReviews;
-      public readonly IReadOnlyList<Review> Reviews;
-
-      public MovieDetail(Movie m, double avgRating, int numReviews, IReadOnlyList<Review> reviews)
-      {
-        movie = m;
-        AvgRating = avgRating;
-        NumReviews = numReviews;
-        Reviews = reviews;
-      }
-    }
-    */
 }//namespace

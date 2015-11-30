@@ -7,3 +7,9 @@ C:\Users\Elisabet\Documents\GitHub\CS341Final\FinalProject\FinalProject\obj\Debu
 C:\Users\Elisabet\Documents\GitHub\CS341Final\FinalProject\FinalProject\obj\Debug\FinalProject.csproj.GenerateResource.Cache
 C:\Users\Elisabet\Documents\GitHub\CS341Final\FinalProject\FinalProject\obj\Debug\FinalProject.exe
 C:\Users\Elisabet\Documents\GitHub\CS341Final\FinalProject\FinalProject\obj\Debug\FinalProject.pdb
+C:\Users\Elisabet\Documents\GitHub\CS341Final\FinalProject\FinalProject\bin\Debug\Microsoft.Maps.MapControl.WPF.dll
+C:\Users\Elisabet\Documents\GitHub\CS341Final\FinalProject\FinalProject\obj\Debug\Themap.g.cs
+C:\Users\Elisabet\Documents\GitHub\CS341Final\FinalProject\FinalProject\obj\Debug\FinalProject_MarkupCompile.cache
+C:\Users\Elisabet\Documents\GitHub\CS341Final\FinalProject\FinalProject\obj\Debug\FinalProject_MarkupCompile.lref
+C:\Users\Elisabet\Documents\GitHub\CS341Final\FinalProject\FinalProject\obj\Debug\Themap.baml
+C:\Users\Elisabet\Documents\GitHub\CS341Final\FinalProject\FinalProject\obj\Debug\FinalProject.g.resources
